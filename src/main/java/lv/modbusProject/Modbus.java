@@ -6,6 +6,8 @@ import de.re.easymodbus.modbusclient.ModbusClient;
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.Stack;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -22,15 +24,8 @@ public class Modbus {
     private int connectTimeout = 500;
     private InputStream inStream;
     private DataOutputStream outStream;
+    private final static char[] hexArray = "0123456789ABCDEF".toCharArray();
 
-    Timer timer = new Timer();
-    TimerTask timerTask = new TimerTask() {
-        @Override
-        public void run() {
-
-            read();
-        }
-    };
 
 
     public void start() {
@@ -42,15 +37,36 @@ public class Modbus {
             e.printStackTrace();
         }
 
-        timer.schedule(timerTask, 0, 100);
+
+        Timer timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+
+                read();
+            }
+        };
+
+
+
+        timer.schedule(timerTask, 0, 50);
 
 
     }
 
+    private void check(String inHex3){
+
+
+
+
+
+
+    }
     public void read() {
 
+
         try {
-            byte[] dataq = {0x00, 0x01, 0x00, 0x00, 0x00, 0x06, (byte) 0xFE, 0x04, 0x00, 0x00, 0x00, 0x05};
+            byte[] requestData = {0x00, 0x01, 0x00, 0x00, 0x00, 0x06, (byte) 0xFE, 0x04, 0x00, 0x00, 0x00, 0x05};
 
             byte[] data = new byte[17];
             int transactionID = 0;
@@ -71,38 +87,9 @@ public class Modbus {
 
             System.out.println("requesting");
 
-        /*outStream.writeInt(transactionID);
-        outStream.writeInt(transactionID2);
-        outStream.writeInt(protocolID);
-        outStream.writeInt(protocolID2);
-        outStream.writeInt(messageLength);
-        outStream.writeInt(messageLength2);
-        outStream.writeInt(unitID);
-        outStream.writeInt(funcCode);
-        outStream.writeInt(address);
-        outStream.writeInt(address2);
-        outStream.writeInt(length);
-        outStream.writeInt(length2);*/
 
-            outStream.write(dataq, 0, 12);
+            outStream.write(requestData, 0, 12);
 
-
-
-
-                                /* outStream.writeInt(length);
-                                 outStream.writeInt(length2);
-                                 outStream.writeInt(address);
-                                 outStream.writeInt(address2);
-
-
-                                 outStream.writeInt(funcCode);
-                                 outStream.writeInt(unitID);
-                                 outStream.writeInt(messageLength);
-                                 outStream.writeInt(messageLength2);
-                                 outStream.writeInt(protocolID);
-                                 outStream.writeInt(protocolID2);
-                                 outStream.writeInt(transactionID);
-                                 outStream.writeInt(transactionID2);*/
 
             outStream.flush();
             //outStream.close();
@@ -133,6 +120,8 @@ public class Modbus {
 
             String inHex3 = bytesToHex(data);
 
+            this.check(inHex3);
+
             System.out.println(inHex3);
 
 
@@ -155,7 +144,7 @@ public class Modbus {
     }
 
 
-    private final static char[] hexArray = "0123456789ABCDEF".toCharArray();
+
 
     public static String bytesToHex(byte[] bytes) {
         char[] hexChars = new char[bytes.length * 2];

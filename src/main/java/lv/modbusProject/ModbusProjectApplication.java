@@ -17,9 +17,7 @@ public class ModbusProjectApplication {
 
 		modbus.start();
 
-		//Modbus2 modbus2 = new Modbus2();
 
-		//modbus2.startread();
 	}
 
 }
