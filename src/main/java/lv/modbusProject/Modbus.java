@@ -17,6 +17,8 @@ import static java.lang.System.out;
 
 public class Modbus {
 
+    Requests requests = new Requests();
+
     private String cardNumber = "80005AE3C1";
     private Socket tcpClientSocket = new Socket();
     protected String ipAddress = "192.168.40.30";
@@ -127,6 +129,11 @@ public class Modbus {
 
             System.out.println("Card number = " + inHex2[15] + inHex2[14] + inHex2[13] + inHex2[12] + inHex2[11]);
             System.out.println("response***");
+
+            outStream.write(requests.noEntry(), 0, 12);
+
+
+            outStream.flush();
 
         } catch (Exception e) {
             e.printStackTrace();
