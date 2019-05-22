@@ -1,11 +1,14 @@
 package lv.modbusProject;
 
+import org.springframework.stereotype.Component;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
 
-public class ConnectionPlace {
+@Component
+public class Connection {
 
 
     private Socket tcpClientSocket = new Socket();

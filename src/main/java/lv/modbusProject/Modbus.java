@@ -1,54 +1,58 @@
 package lv.modbusProject;
 
-import de.re.easymodbus.modbusclient.ModbusClient;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.net.Socket;
-import java.net.UnknownHostException;
-import java.sql.Time;
-import java.time.LocalTime;
-import java.util.Stack;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
+import java.util.concurrent.*;
 
-import static java.lang.System.out;
-
-
+@Component
 public class Modbus {
 
 
 
     private String cardNumber = "80005AE3C1";
-    Requests requests = new Requests();
-    ConnectionPlace connectionPlace = new ConnectionPlace();
-    RequestPlace requestPlace = new RequestPlace();
+    @Autowired
+    Connection connection;
+    @Autowired
+    Request request;
 
     private Socket tcpClientSocket;
-
-
+    private List<Integer> listOfAddresses = new ArrayList<>();
+    private byte[] responseData = new byte[17];
 
 
 
     public void start() {
 
         try {
-          tcpClientSocket =   connectionPlace.connect("192.168.40.30", 502);
+          tcpClientSocket =   connection.connect("192.168.40.30", 502);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        requestPlace.ready(tcpClientSocket);
+        request.ready(tcpClientSocket);
+
+        listOfAddresses.add(1);
+
+       // Timer timer = new Timer();
+        //MyTimerTask myTimerTask = new MyTimerTask(request, listOfAddresses);
+
+
+        //timer.schedule(myTimerTask, 0, 50);
+
+        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+
+        Runnable task = () -> request.read(1);
+
+        executor.scheduleAtFixedRate(task, 0,  50, TimeUnit.MILLISECONDS);
 
 
 
-        Timer timer = new Timer();
-        MyTimerTask myTimerTask = new MyTimerTask(requestPlace);
-
-        requestPlace.read();
-
-        timer.schedule(myTimerTask, 0, 50);
-
+        //request.write(1, 10);
 
     }
 
