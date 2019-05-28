@@ -20,11 +20,12 @@ public class Modbus {
     @Autowired
     Request request;
 
+
     private Socket tcpClientSocket;
     private List<Integer> listOfAddresses = new ArrayList<>();
     private byte[] responseData = new byte[17];
 
-
+    private  byte[] requestData = {0x00, 0x01, 0x00, 0x00, 0x00, 0x06, (byte) 0xFE, 0x06, 0x00, 0x02, 0x00, (byte) 0xC8};
 
     public void start() {
 
@@ -35,7 +36,7 @@ public class Modbus {
         }
 
         request.ready(tcpClientSocket);
-
+        request.write(2,200);
         listOfAddresses.add(1);
 
        // Timer timer = new Timer();
@@ -46,13 +47,15 @@ public class Modbus {
 
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 
+
+
         Runnable task = () -> request.read(1);
 
-        executor.scheduleAtFixedRate(task, 0,  50, TimeUnit.MILLISECONDS);
+        executor.scheduleAtFixedRate(task, 0,  10, TimeUnit.MILLISECONDS);
 
 
 
-        //request.write(1, 10);
+
 
     }
 

@@ -3,24 +3,26 @@ package lv.modbusProject;
 import lv.modbusProject.DAL.Repository;
 import lv.modbusProject.Domain.Event;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
+import java.util.Arrays;
 
 @Component
 public class Request {
 
     @Autowired
-    Repository repository;
-    @Autowired
     ResponseParser responseParser;
+
     private InputStream inStream;
     private DataOutputStream outStream;
     private Requests requests = new Requests();
-
+    private byte[] responseData = new byte[17];
+    private int counter = 0;
 
     public void ready(Socket tcpClientSocket) {
 
@@ -40,8 +42,7 @@ public class Request {
 
     public void read(int address) {
 
-
-        byte[] responseData = new byte[17];
+        //responseData = new byte[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
         try {
             byte[] requestData = {0x00, 0x01, 0x00, 0x00, 0x00, 0x06, (byte) 0xFE, 0x04, 0x00, 0x00, 0x00, 0x05};
@@ -61,42 +62,29 @@ public class Request {
             int length2 = 5;
 
 
-            System.out.println("requesting");
+            //System.out.println("requesting");
 
 
             outStream.write(requestData, 0, 12);
 
             outStream.flush();
 
-            System.out.println("sent");
 
-            System.out.println(inStream.read(responseData, 0, 17));
-            System.out.println("response***");
+            inStream.read(responseData, 0, 17);
 
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        if(responseData.length != 0 )
-        {
-            System.out.println("cool");
 
-            if(responseParser.parse(responseData))
-            {
-                this.write(1, 10);
-                Event event = new Event();
-
-                event.setEventInfo("karte");
-        repository.addEvent(event);
+        if (responseData[10] == 16) {
 
 
+        responseParser.parse(responseData);
+            //responseData = new byte[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-
-            }
-
-
-        }
+    }
 
 
 
@@ -107,7 +95,7 @@ public class Request {
     public void write(int address, int info) {
 
         try {
-            byte[] requestData = {0x00, 0x01, 0x00, 0x00, 0x00, 0x06, (byte) 0xFE, 0x06, 0x00, 0x01, 0x00, (byte) 0x64};
+            byte[] requestData = {0x00, 0x01, 0x00, 0x00, 0x00, 0x06, (byte) 0xFE, 0x06, 0x00, (byte)address, 0x00, (byte) info};
 
 
             int transactionID = 0;
@@ -124,17 +112,18 @@ public class Request {
             int length2 = 5;
 
 
-            System.out.println("requesting");
+            //System.out.println("requesting");
 
 
             outStream.write(requestData, 0, 12);
 
             outStream.flush();
 
-            System.out.println("sent");
-
+            //System.out.println("sent");
+            inStream.read(responseData, 0, 12);
             //System.out.println(inStream.read(responseData, 0, 17));
-            System.out.println("response***");
+            //System.out.println("response***");
+          //responseData = null;
 
 
         } catch (Exception e) {
