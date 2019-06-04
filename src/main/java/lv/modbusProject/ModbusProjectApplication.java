@@ -10,7 +10,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 @SpringBootApplication
-//@EnableAsync
 public class ModbusProjectApplication {
 
 
@@ -21,7 +20,6 @@ public class ModbusProjectApplication {
 		ApplicationContext applicationContext = SpringApplication.run(ModbusProjectApplication.class, args);
 
 		Modbus modbus = applicationContext.getBean(Modbus.class);
-
 		modbus.start();
 
 

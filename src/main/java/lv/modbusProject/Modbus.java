@@ -39,11 +39,6 @@ public class Modbus {
         request.write(2,200);
         listOfAddresses.add(1);
 
-       // Timer timer = new Timer();
-        //MyTimerTask myTimerTask = new MyTimerTask(request, listOfAddresses);
-
-
-        //timer.schedule(myTimerTask, 0, 50);
 
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 

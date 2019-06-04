@@ -1,0 +1,375 @@
+body {font-family: Arial, Helvetica, sans-serif;
+    background-color: lightblue;
+    margin: auto;
+    height: 1000px;
+}
+
+form {border: 2px solid #7071f1;
+
+        margin: auto;
+    width: 280px;
+    padding-top: 50px;
+
+        }
+form1 {border: 1px solid white;
+
+        margin: auto;
+
+
+        }
+.democlass {
+    border: 5px solid red;
+
+}
+span.a {
+  display: inline-block; /* the default for span */
+
+  height: 50px;
+    font-size: 30px;
+  padding: 5px;
+
+
+}
+span.b {
+    display: inline-block; /* the default for span */
+
+    height: 50px;
+    font-size: 50px;
+    padding: 5px;
+
+
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+[class*="col-"] {
+  float: left;
+  padding: 15px;
+}
+
+.col-1 {width: 33%;
+
+
+
+
+}
+.col-2 {width: 16.66%;}
+.col-3 {width: 100%;
+
+
+
+}
+
+/*
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+}
+*/
+
+button:hover {
+    opacity: 0.8;
+}
+
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+
+}
+
+img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
+.container {
+    padding: 16px;
+}
+
+span.psw {
+
+    padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+       display: block;
+       float: none;
+    }
+    .cancelbtn {
+       width: 100%;
+    }
+}
+h1 {
+    color: #008CBA;
+    text-align: center;
+}
+h2 {
+
+    text-align: center;
+}
+p.serif {
+    font-family: "Times New Roman", Times, serif;
+    text-align: center;
+
+
+
+}
+
+l{
+    font-size: 30px;
+
+
+}
+l2{
+    font-size: 50px;
+
+
+}
+table {
+    width: 90%;
+    border-spacing: 1px;
+    margin: auto;
+}
+
+td {
+    border: 1px solid white;
+    border-collapse: collapse;
+
+    text-align: center;
+    padding: 8px;
+
+}
+th {
+    border: 1px solid white;
+    border-collapse: collapse;
+    background-color: #99ddff;
+    text-align: center;
+    padding: 8px;
+
+}
+
+
+
+tr:nth-child(even) {
+  background-color: #e6e6e6;
+
+}
+
+
+input[type=text], input[type=password] {
+
+    width: 150px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid gray;
+    border-radius: 4px;
+}
+
+input[type=text] {
+    width: 100px;
+    padding: 12px 20px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    border: 1px solid gray;
+    border-radius: 4px;
+}
+input[type=date] {
+    width: 200px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid gray;
+    border-radius: 4px;
+}
+input[type=button], input[type=submit], input[type=reset] {
+    background-color: #0080ff;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: auto;
+    cursor: pointer;
+}
+
+/* The alert message box */
+.alert {
+  padding: 20px;
+  background-color: #f44336; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
+.button {
+    background-color: #0080ff;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.select {
+  position: relative;
+  font-family: Arial;
+}
+.select select {
+  display: none; /*hide original SELECT element:*/
+}
+.select-selected {
+  background-color: DodgerBlue;
+}
+/*style the arrow inside the select element:*/
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+/*style the items (options), including the selected item:*/
+<!--.select-items div,.select-selected {-->
+  <!--color: #ffffff;-->
+  <!--padding: 8px 16px;-->
+  <!--border: 1px solid transparent;-->
+  <!--border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;-->
+  <!--cursor: pointer;-->
+<!--}-->
+/*style items (options):*/
+.select-items {
+  position: absolute;
+  background-color: DodgerBlue;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+/*hide the items when the select box is closed:*/
+.select-hide {
+  display: none;
+}
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+div.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+
+  bottom: 0;
+
+  padding: 1px;
+  width: 90%;
+  margin: auto;
+
+}
+.test {
+
+    margin: auto;
+    width: 500px;
+    border: crimson 2px;
+    padding-top: 70px;
+    text-align: center;
+
+}
+#page1 {
+    height:1100px;
+
+    background:#afc9ff;
+    padding-top:110px;
+}
+
+#page2 {
+    height:1100px;
+
+    background:#777cdc;
+
+}
+
+#page3 {
+    height:1100px;
+
+    background:#9b70c0;
+    padding-top:150px;
+}
+
+.page-padding {height:90px; width:100%;}
+
+.icon-bar {
+    width: 100%;
+    background-color: #555;
+    overflow: auto;
+    position: fixed;
+}
+
+.icon-bar a {
+    float: left;
+    width: 20%;
+    text-align: center;
+    padding: 12px 0;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 36px;
+
+}
+
+.icon-bar a:hover {
+    background-color: #000;
+}
+
+.active {
+    background-color: #5f98af;
+}
+
+img {
+
+    margin: auto;
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

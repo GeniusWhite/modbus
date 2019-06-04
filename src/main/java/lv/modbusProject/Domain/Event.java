@@ -8,6 +8,25 @@ public class Event {
         private Timestamp eventTime;
         private String eventInfo;
 
+    public String getEventDateString() {
+        return eventDateString;
+    }
+
+    public void setEventDateString(String eventDateString) {
+        this.eventDateString = eventDateString;
+    }
+
+    public String getEventTimeString() {
+        return eventTimeString;
+    }
+
+    public void setEventTimeString(String eventTimeString) {
+        this.eventTimeString = eventTimeString;
+    }
+
+    private String eventDateString;
+        private String eventTimeString;
+
 
     public Timestamp getEventDate() {
         return eventDate;

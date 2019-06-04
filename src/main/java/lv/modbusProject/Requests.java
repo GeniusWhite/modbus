@@ -1,5 +1,8 @@
 package lv.modbusProject;
 
+import org.springframework.stereotype.Component;
+
+
 public class Requests {
 
 
