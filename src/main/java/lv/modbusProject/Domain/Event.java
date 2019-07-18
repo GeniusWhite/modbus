@@ -4,9 +4,22 @@ import java.sql.Timestamp;
 
 public class Event {
 
-        private Timestamp eventDate;
-        private Timestamp eventTime;
-        private String eventInfo;
+
+    private int eventID;
+    private Timestamp eventDate;
+    private Timestamp eventTime;
+    private String eventInfo;
+
+
+    public int getEventID() {
+        return eventID;
+    }
+
+    public void setEventID(int eventID) {
+        this.eventID = eventID;
+    }
+
+
 
     public String getEventDateString() {
         return eventDateString;

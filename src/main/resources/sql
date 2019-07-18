@@ -1,0 +1,36 @@
+
+CREATE DATABASE access;
+
+drop  table IF EXISTS  accessEvent, worker, workerKey;
+
+CREATE TABLE accessEvent (
+    eventID int identity(1,1) PRIMARY KEY not null,
+	eventDate datetime Default(getdate()),
+	eventTime datetime Default(getdate()),
+	eventInfo varchar(50)
+
+);
+
+
+
+CREATE TABLE workerKey (
+    workerKeyID int identity(1,1) PRIMARY KEY not null ,
+	  keyString varchar(50) null,
+	  keyLifeStart datetime Default(getdate()),
+	  keyLifeEnd datetime
+
+);
+
+
+CREATE TABLE worker (
+    workerID int identity(1,1) PRIMARY KEY not null ,
+	  firstName varchar(50) null ,
+	  lastName varchar(50) null ,
+    workerKeyID int foreign key references workerKey(workerKeyID)
+);
+
+
+
+
+
+

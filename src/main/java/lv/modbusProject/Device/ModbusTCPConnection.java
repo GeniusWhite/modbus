@@ -1,4 +1,4 @@
-package lv.modbusProject;
+package lv.modbusProject.Device;
 
 import org.springframework.stereotype.Component;
 
@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.net.Socket;
 
 @Component
-public class Connection {
+public class ModbusTCPConnection {
 
 
     private Socket tcpClientSocket = new Socket();

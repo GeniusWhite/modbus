@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import java.time.LocalDate;
 
 @Controller
-public class Controller1 {
+public class HomePageController {
 
 
     @GetMapping("/")

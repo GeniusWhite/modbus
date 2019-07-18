@@ -24,10 +24,10 @@ function checkDate(i) {
 
 var date = day+"."+m+"."+y;
 
-var token1 = document.getElementById('token').value;
+
 
 var request = new XMLHttpRequest();
-request.open('GET', 'http://192.168.40.100:8888/getEvents?date='+date, true);
+request.open('GET', 'http://192.168.40.100:8888/getWorkers', true);
 
 
 request.send();
@@ -63,16 +63,14 @@ try{
           var cell4 = row.insertCell(3);
           var cell5 = row.insertCell(4);
           var cell6 = row.insertCell(5);
-          var cell7 = row.insertCell(6);
-          var cell8 = row.insertCell(7);
-           var cell9 = row.insertCell(8);
-           var cell10 = row.insertCell(9);
-           var cell11 = row.insertCell(10);
-           var cell12 = row.insertCell(11);
-          cell1.innerHTML = data[i].eventDate;
-          cell2.innerHTML = data[i].eventTime;
-          cell3.innerHTML = data[i].eventInfo;
+        var cell7 = row.insertCell(6);
 
+          cell1.innerHTML = data[i].workerID;
+          cell2.innerHTML = data[i].firstName;
+          cell3.innerHTML = data[i].lastName;
+        cell4.innerHTML = data[i].keyString;
+        cell5.innerHTML = data[i].keyLifeStart;
+        cell6.innerHTML = data[i].keyLifeEnd;
 
         }
   }

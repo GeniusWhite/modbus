@@ -1,4 +1,4 @@
-package lv.modbusProject;
+package lv.modbusProject.Device;
 
 import lv.modbusProject.DAL.Repository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package lv.modbusProject;
+package lv.modbusProject.Device;
 
 import org.springframework.stereotype.Component;
 

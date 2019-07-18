@@ -1,7 +1,7 @@
-function loadHistory(selectedDate){
-    console.log(selectedDate.value);
+function loadEventHistory(selectedDate, selectedDateEnd){
+
         var d = new Date(selectedDate.value);
-        console.log(d);
+    var d1 = new Date(selectedDateEnd.value);
 
         var y = d.getFullYear();
         var m = d.getMonth() + 1;
@@ -9,20 +9,27 @@ function loadHistory(selectedDate){
         m = checkDate(m);
         day = checkDate(day);
 
-        function checkDate(i) {
-            if (i < 10) {
-                i = "0" + i;
-            }
-            return i;
+
+
+    var y1 = d1.getFullYear();
+    var m1 = d1.getMonth() + 1;
+    var day1 = d1.getDate();
+    m1 = checkDate(m1);
+    day1 = checkDate(day1);
+
+    function checkDate(i) {
+        if (i < 10) {
+            i = "0" + i;
         }
+        return i;
+    }
 
-        var date = day + "." + m + "." + y;
-        console.log(date);
+ let date = day + "." + m + "." + y+"/";
+    let date1 = day1 + "." + m1 + "." + y1;
 
-
-
-        var request = new XMLHttpRequest();
-        request.open('GET', 'http://192.168.40.100:8888/getEvents?date=' + date, true);
+    console.log(date + date1);
+    let request = new XMLHttpRequest();
+        request.open('GET', 'http://192.168.40.100:8888/getEvents?date=' + date+date1, true);
 
 
         request.onload = function () {
@@ -32,25 +39,37 @@ function loadHistory(selectedDate){
             } catch (err) {
 
             }
-            if (data == null) {
+            if (data.length <1) {
 
+                var parameter = document.createElement("p");
+                var node = document.createTextNode("pagaidam neka nava...");
+                parameter.appendChild(node);
 
-                var para = document.createElement("p");
-                var node = document.createTextNode(date);
-                para.appendChild(node);
                 var element = document.getElementById("history");
-                element.appendChild(para);
+                element.appendChild(parameter);
+
             } else if (request.status >= 200 && request.status < 400) {
                 data.reverse();
 
-                var para = document.createElement("p");
-                var node = document.createTextNode(date);
-                para.appendChild(node);
-                var element = document.getElementById("history");
-                element.appendChild(para);
+
+                var button = document.createElement('button');
+                button.setAttribute('class', 'collapsible');
+                button.setAttribute('onclick', 'expand()');
+                button.innerHTML = date+date1;
+
+                var div = document.createElement('div');
+                div.setAttribute('class', 'content');
+
+
+
                 var table = document.createElement("table");
+                div.appendChild(table);
+
                 var historyElement = document.getElementById("history");
-                historyElement.appendChild(table);
+
+
+                historyElement.appendChild(button);
+                historyElement.appendChild(div);
 
                 var header = table.createTHead();
                 var headerRow = header.insertRow(0);
@@ -69,7 +88,7 @@ function loadHistory(selectedDate){
                 var headerCell11 = headerRow.insertCell(10);
                 var headerCell12 = headerRow.insertCell(11);
 
-
+                headerCell1.innerHTML = "npk";
                 headerCell2.innerHTML = "in datums";
                 headerCell3.innerHTML = "in laiks";
                 headerCell4.innerHTML = "info";
@@ -92,9 +111,11 @@ function loadHistory(selectedDate){
                     var cell10 = row.insertCell(9);
                     var cell11 = row.insertCell(10);
                     var cell12 = row.insertCell(11);
-                    cell1.innerHTML = data[i].eventDateString;
-                    cell2.innerHTML = data[i].eventTimeString;
-                    cell3.innerHTML = data[i].eventInfo;
+                    cell1.innerHTML = data[i].eventID;
+                    cell2.innerHTML = data[i].eventDateString;
+                    cell3.innerHTML = data[i].eventTimeString;
+                    cell4.innerHTML = data[i].eventInfo;
+
 
 
                 }

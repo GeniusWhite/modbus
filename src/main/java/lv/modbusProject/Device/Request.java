@@ -1,16 +1,12 @@
-package lv.modbusProject;
+package lv.modbusProject.Device;
 
-import lv.modbusProject.DAL.Repository;
-import lv.modbusProject.Domain.Event;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
-import java.util.Arrays;
 
 @Component
 public class Request {
@@ -40,8 +36,8 @@ public class Request {
     }
 
 
-    public void read(int address) {
-
+    public int read(int address) {
+            int status=0;
         //responseData = new byte[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
         try {
@@ -83,11 +79,11 @@ public class Request {
 
         responseParser.parse(responseData);
             //responseData = new byte[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-
+            status = 1;
     }
 
 
-
+        return status;
 
     }
 
@@ -98,7 +94,7 @@ public class Request {
             byte[] requestData = {0x00, 0x01, 0x00, 0x00, 0x00, 0x06, (byte) 0xFE, 0x06, 0x00, (byte)address, 0x00, (byte) info};
 
 
-            int transactionID = 0;
+          /*  int transactionID = 0;
             int transactionID2 = 1;
             int protocolID = 0;
             int protocolID2 = 0;
@@ -110,7 +106,7 @@ public class Request {
             int address2 = 0;
             int length = 0;
             int length2 = 5;
-
+*/
 
             //System.out.println("requesting");
 
